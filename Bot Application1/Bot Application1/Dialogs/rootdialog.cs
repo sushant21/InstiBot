@@ -13,17 +13,12 @@
     [Serializable]
     public class RootDialog : LuisDialog<object>
     {
+        [LuisIntent("None")]
         [LuisIntent("")]
         public async Task None(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Sorry, I didn't get that");
             context.Wait(MessageReceived);    
-        }
-        [LuisIntent("None")]
-        public async Task None(IDialogContext context, Luisresult result)
-        {
-            await context.PostAsync("Sorry, I didn't get that")
-            context.Wait(MessageReceived);
         }
         [LuisIntent("Buy")]
         public async Task Buy(IDialogContext context, LuisResult result)
