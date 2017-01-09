@@ -7,7 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
-
+using Microsoft.Bot.Builder.Dialogs
 namespace Bot_Application1
 {
     [BotAuthentication]
@@ -17,17 +17,21 @@ namespace Bot_Application1
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
         /// </summary>
+        internal static IDialog<object> MakeRoot()
+        {
+            return Chain.From(() => new RootDialog());
+        }
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+               
+                await Conversation.SendAsync(activity, MakeRoot)
                 // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
+                
 
                 // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
-                await connector.Conversations.ReplyToActivityAsync(reply);
+                
             }
             else
             {
