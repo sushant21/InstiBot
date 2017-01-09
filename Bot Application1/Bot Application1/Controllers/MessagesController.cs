@@ -7,7 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
-using Microsoft.Bot.Builder.Dialogs
+using Microsoft.Bot.Builder.Dialogs;
 namespace Bot_Application1
 {
     [BotAuthentication]
@@ -19,14 +19,14 @@ namespace Bot_Application1
         /// </summary>
         internal static IDialog<object> MakeRoot()
         {
-            return Chain.From(() => new RootDialog());
+            return Chain.From(() => new Bot_Application1.RootDialog());
         }
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
             {
-               
-                await Conversation.SendAsync(activity, MakeRoot)
+
+                await Conversation.SendAsync(activity, MakeRoot);
                 // calculate something for us to return
                 
 
