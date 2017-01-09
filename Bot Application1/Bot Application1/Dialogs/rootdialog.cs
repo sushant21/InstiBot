@@ -33,7 +33,8 @@
         }
         public async Task Sell(IDialogContext context, LuisResult result)
         {
-
+            await context.PostAsync("you wanna sell?");
+            context.Wait(MessageReceived);
         }
 
 
