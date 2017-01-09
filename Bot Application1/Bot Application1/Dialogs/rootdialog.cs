@@ -1,6 +1,5 @@
 ﻿namespace Bot_Application1
 {
-    
     using System;
     using System.Collections.Generic;
     using System.Threading;
@@ -11,6 +10,7 @@
     using Microsoft.Bot.Builder.Luis.Models;
     using Microsoft.Bot.Connector;
     using BestMatchDialog;
+
     [Serializable]
     public class GreetingsDialog : BestMatchDialog<object>
     {
@@ -45,13 +45,13 @@
         public async Task None(IDialogContext context, IAwaitable<IMessageActivity> message, LuisResult result)
         {
             var cts = new CancellationTokenSource();
-            await context.Forward(new GreetingsDialog(), GreetingDialogDone, await message, cts.Token);
+            await context.Forward(new GreetingsDialog(), this.GreetingDialogDone, await message, cts.Token);
         }
 
-        private async Task GreetingDialogDone(IDialogContext context, IAwaitable<bool> result)
+        private async Task GreetingDialogDone(IDialogContext context, IAwaitable<object> result)
         {
             var success = await result;
-            if (!success)
+            if (success.Equals(false))
                 await context.PostAsync("I'm sorry. I didn't understand you.");
 
             context.Wait(MessageReceived);
