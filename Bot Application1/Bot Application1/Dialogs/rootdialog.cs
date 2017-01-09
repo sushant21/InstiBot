@@ -18,10 +18,23 @@
             await context.PostAsync("Sorry, I didn't get that")
             context.Wait(MessageReceived);    
         }
+        [LuisIntent("None")]
+        public async Task None(IDialogContext context, Luisresult result)
+        {
+            await context.PostAsync("Sorry, I didn't get that")
+            context.Wait(MessageReceived);
+        }
         [LuisIntent("Buy")]
         public async Task Buy(IDialogContext context, Luisresult result)
         {
-
+            await context.PostAsync("You wanna buy haan,,,yo man!!!! hi five")
+            context.Wait(MessageReceived);
+        }
+        [LuisIntent("Sell")]
+        public async Task Buy(IDialogContext context, Luisresult result)
+        {
+            await context.PostAsync("What you wanna sell nigga,,,,how much u got")
+            context.Wait(MessageReceived);
         }
 
 
