@@ -40,6 +40,7 @@
     [Serializable]
     public class RootDialog : LuisDialog<object>
     {
+        [LuisIntent("None")]
         [LuisIntent("")]
         public async Task None(IDialogContext context, IAwaitable<IMessageActivity> message, LuisResult result)
         {
