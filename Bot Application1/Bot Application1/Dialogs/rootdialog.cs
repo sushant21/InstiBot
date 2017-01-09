@@ -26,6 +26,7 @@
             await context.PostAsync("you wanna buy?");
             context.Wait(MessageReceived);
         }
+        [LuisIntent("Sell")]
         public async Task Sell(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("you wanna sell?");
