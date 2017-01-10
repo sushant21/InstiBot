@@ -12,7 +12,7 @@
     using BestMatchDialog;
 
     [Serializable]
-    public class GreetingsDialog : BestMatchDialog<object>
+    public class GreetingsDialog : BestMatchDialog<bool>
     {
         [BestMatch(new string[] { "Hi", "Hi There", "Hello there", "Hey", "Hello",
         "Hey there", "Greetings", "Good morning", "Good afternoon", "Good evening", "Good day" },
@@ -44,14 +44,15 @@
         [LuisIntent("")]
         public async Task None(IDialogContext context, IAwaitable<IMessageActivity> message, LuisResult result)
         {
-            var cts = new CancellationTokenSource();
-            await context.Forward(new GreetingsDialog(), this.GreetingDialogDone, await message, cts.Token);
+            var dialog = new GreetingsDialog();
+            dialog.InitialMessage = result.Query;
+            context.Call(dialog, this.GreetingDialogDone);
         }
 
-        private async Task GreetingDialogDone(IDialogContext context, IAwaitable<object> result)
+        private async Task GreetingDialogDone(IDialogContext context, IAwaitable<bool> result)
         {
             var success = await result;
-            if (success.Equals(false))
+            if (!success)
                 await context.PostAsync("I'm sorry. I didn't understand you.");
 
             context.Wait(MessageReceived);
