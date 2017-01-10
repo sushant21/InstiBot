@@ -16,15 +16,15 @@
     {
         [BestMatch(new string[] { "Hi", "Hi There", "Hello there", "Hey", "Hello",
         "Hey there", "Greetings", "Good morning", "Good afternoon", "Good evening", "Good day" },
-           threshold: 0.5, ignoreCase: false, ignoreNonAlphaNumericCharacters: false)]
+           threshold: 0.5, ignoreCase: true, ignoreNonAlphaNumericCharacters: false)]
         public async Task WelcomeGreeting(IDialogContext context, string messageText)
         {
-            await context.PostAsync("Hello there. How can I help you?");
+            await context.PostAsync("Hi. How can I help you?");
             context.Done(true);
         }
 
         [BestMatch(new string[] { "bye", "bye bye", "got to go",
-        "see you later", "laters", "adios" })]
+        "see you later", "laters", "adios" },threshold: 0.5, ignoreCase: true, ignoreNonAlphaNumericCharacters: false)]
         public async Task FarewellGreeting(IDialogContext context, string messageText)
         {
             await context.PostAsync("Bye. Have a good day.");
