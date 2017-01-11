@@ -61,7 +61,6 @@
         public async Task Buy(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("you wanna buy huh?");
-            context.PrivateConversationData.SetValue<LuisResult>("luis", result);
             context.Wait(MessageReceived);
         }
         [LuisIntent("Sell")]
