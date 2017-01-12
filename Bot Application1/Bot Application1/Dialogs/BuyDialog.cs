@@ -11,6 +11,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Luis;
 using Microsoft.Bot.Builder.Luis.Models;
 using System.Collections.Generic;
+using Microsoft.Bot.Builder.FormFlow;
 
 namespace Bot_Application1
 {
@@ -46,6 +47,8 @@ namespace Bot_Application1
                     else if(is_book)
                     {
                         await context.PostAsync("You selected book category");
+                        var book_form = new FormDialog<BookForm>(new BookForm(), BookForm.BuildForm, FormOptions.PromptInStart);
+                        context.Call(book_form,BookFormComplete);
                         context.Done(true);
                     }
                     else if(is_gadget)
@@ -67,5 +70,36 @@ namespace Bot_Application1
             }
 
         }
+        private async Task BookFormComplete(IDialogContext context, IAwaitable<BookForm> result)
+        {
+            var BookResult = await result;
+            string template =$"Title: {BookResult.book_name}, Author: {BookResult.book_author}, Course:{BookResult.book_course}";
+
+            await context.PostAsync(template);
+        }
     }
+    public class BookForm
+    {
+        [Prompt(new string[] { "What is the name of the book you are looking for?" })]
+        public string book_name { get; set; }
+
+        [Optional]
+        [Prompt("Author?(Optional)")]
+        public string book_author { get; set; }
+
+        [Optional]
+        [Prompt("Course?(Optional)")]
+        public string book_course { get; set; }
+
+        public static IForm<BookForm> BuildForm()
+        {
+            return new FormBuilder<BookForm>()
+                .Field(nameof(book_name))
+                .Field(nameof(book_author))
+                .Field(nameof(book_course))
+                .AddRemainingFields()
+                .Build();
+        }
+    }
+    
 }
