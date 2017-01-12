@@ -23,9 +23,10 @@ namespace Bot_Application1
             context.PrivateConversationData.TryGetValue<LuisResult>("luis", out result);
             if (result!=null)
             {
-                // var entities = new List<EntityRecommendation>(result.Entities);
+                 var entities = new List<EntityRecommendation>(result.Entities);
                 EntityRecommendation itemEntityRecommendation;
-                if (result.TryFindEntity("item", out itemEntityRecommendation))
+                if (result.TryFindEntity("item", out itemEntityRecommendation)) ;
+                if (entities.Any((Entity)=>Entity.Type!=null))
                 {
                     await context.PostAsync("Entity detected");
                     // var itemEntity = (entities.Where((Entity) => Entity.Type == "item").First()).Entity;
