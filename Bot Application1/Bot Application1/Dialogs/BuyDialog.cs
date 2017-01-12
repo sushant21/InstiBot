@@ -47,7 +47,7 @@ namespace Bot_Application1
                     else if(is_book)
                     {
                         await context.PostAsync("You selected book category");
-                        var book_form = new FormDialog<BookForm>(new BookForm(), BookForm.BuildForm, FormOptions.PromptInStart);
+                        var book_form = new FormDialog<BookForm>(null, BookForm.BuildForm, FormOptions.PromptInStart);
                         context.Call(book_form,BookFormComplete);
                         context.Done(true);
                     }
