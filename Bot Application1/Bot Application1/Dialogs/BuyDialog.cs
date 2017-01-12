@@ -24,8 +24,9 @@ namespace Bot_Application1
             if (result!=null)
             {
                 var entities = new List<EntityRecommendation>(result.Entities);
-                if(entities.Any((Entity)=> Entity.Type == "item"))
+                if(entities.Any((Entity)=> Entity.Entity == "item"))
                 {
+                    await context.PostAsync("Entity detected");
                     var itemEntity = (entities.Where((Entity) => Entity.Type == "item").First()).Entity;
                     List<string> cycle = new List<string> { "cycle","cycles","bicycle","bicycles","bike","bikes" };
                     List<string> book = new List<string> { "book", "books" };
@@ -58,7 +59,7 @@ namespace Bot_Application1
                 else
                 {
                     await context.PostAsync("You did not mention product");
-                    context.Done<object>(null);
+                    context.Done(false);
                 }
             }
 
