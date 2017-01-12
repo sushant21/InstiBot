@@ -81,14 +81,14 @@ namespace Bot_Application1
     [Serializable]
     public class BookForm
     {
-        [Prompt(new string[] { "What is the name of the book you are looking for?" })]
+        [Prompt(  "What is the name of the book you are looking for?")]
         public string book_name { get; set; }
 
-        [Optional]
+        //[Optional]
         [Prompt("Author?(Optional)")]
         public string book_author { get; set; }
 
-        [Optional]
+        //[Optional]
         [Prompt("Course?(Optional)")]
         public string book_course { get; set; }
 
