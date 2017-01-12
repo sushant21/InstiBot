@@ -25,7 +25,7 @@ namespace Bot_Application1
             {
                 // var entities = new List<EntityRecommendation>(result.Entities);
                 EntityRecommendation itemEntityRecommendation;
-                if (result.TryFindEntity("item", out itemEntityRecommendation)))
+                if (result.TryFindEntity("item", out itemEntityRecommendation))
                 {
                     await context.PostAsync("Entity detected");
                     // var itemEntity = (entities.Where((Entity) => Entity.Type == "item").First()).Entity;
