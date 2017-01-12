@@ -27,9 +27,9 @@ namespace Bot_Application1
                 if(entities.Any((Entity)=> Entity.Type == "item"))
                 {
                     var itemEntity = (entities.Where((Entity) => Entity.Type == "item").First()).Entity;
-                    List<string> cycle = new List<string> { "cycle","cycles","bicycle","bicycles" };
+                    List<string> cycle = new List<string> { "cycle","cycles","bicycle","bicycles","bike","bikes" };
                     List<string> book = new List<string> { "book", "books" };
-                    List<string> gadgets = new List<string> { "phone","phones", "laptop", "earphone", "earphones" };
+                    List<string> gadgets = new List<string> { "phone","phones", "laptop", "earphone", "earphones" ,"sd card","memory card"};
                     itemEntity = itemEntity.ToLower();
                     bool is_cycle = cycle.Any(s => itemEntity.Contains(s));
                     bool is_book = book.Any(s => itemEntity.Contains(s));

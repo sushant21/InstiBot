@@ -66,7 +66,7 @@ namespace Bot_Application1
             else if (message.Type == ActivityTypes.Ping)
             {
             }
-
+      
             return null;
         }
     }

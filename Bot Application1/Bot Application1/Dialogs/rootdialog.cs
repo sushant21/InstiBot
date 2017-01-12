@@ -15,7 +15,7 @@
     public class GreetingsDialog : BestMatchDialog<bool>
     {
         [BestMatch(new string[] { "Hi", "Hi There", "Hello there", "Hey", "Hello",
-        "Hey there", "Greetings", "Good morning", "Good afternoon", "Good evening", "Good day" },
+        "Hey there", "Greetings", "Good morning", "Good afternoon", "Good evening", "Good day","howdy" },
            threshold: 0.5, ignoreCase: true, ignoreNonAlphaNumericCharacters: false)]
         public async Task WelcomeGreeting(IDialogContext context, string messageText)
         {
@@ -24,7 +24,7 @@
         }
 
         [BestMatch(new string[] { "bye", "bye bye", "got to go",
-        "see you later", "laters", "adios" },threshold: 0.5, ignoreCase: true, ignoreNonAlphaNumericCharacters: false)]
+        "see you later", "laters", "adios","hastalavista","sayo nara" },threshold: 0.5, ignoreCase: true, ignoreNonAlphaNumericCharacters: false)]
         public async Task FarewellGreeting(IDialogContext context, string messageText)
         {
             await context.PostAsync("Bye. Have a good day.");
