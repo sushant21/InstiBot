@@ -24,7 +24,7 @@ namespace Bot_Application1
             if (result!=null)
             {
                 var entities = new List<EntityRecommendation>(result.Entities);
-                if(entities.Any((Entity)=> Entity.Type == "item"))
+                if(entities.Any((Entity)=> Entity.Entity == "item"))
                 {
                     await context.PostAsync("Entity detected");
                     var itemEntity = (entities.Where((Entity) => Entity.Type == "item").First()).Entity;
