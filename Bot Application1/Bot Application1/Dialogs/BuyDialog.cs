@@ -78,6 +78,7 @@ namespace Bot_Application1
             await context.PostAsync(template);
         }
     }
+    [Serializable]
     public class BookForm
     {
         [Prompt(new string[] { "What is the name of the book you are looking for?" })]
