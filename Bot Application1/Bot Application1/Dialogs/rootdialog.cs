@@ -58,18 +58,29 @@
             context.Wait(MessageReceived);
         }
         [LuisIntent("Buy")]
-        public async Task Buy(IDialogContext context, LuisResult result)
+        public async Task Buy(IDialogContext context,  LuisResult result)
         {
-            await context.PostAsync("you wanna buy huh?");
-            context.Wait(MessageReceived);
+            var cts = new CancellationTokenSource();
+            await context.PostAsync("you want to buy");
+            context.PrivateConversationData.SetValue<LuisResult>("luis", result);
+            context.Call<bool>(new BuyDialog(), ResumeAfterBuyDialog);
+        }
+        private  async Task ResumeAfterBuyDialog(IDialogContext context, IAwaitable<bool> result)
+        {
+            var success = await result;
+            if (success)
+            {
+                await context.PostAsync("How else can I help you?");
+                context.Wait(MessageReceived);
+            }
         }
         [LuisIntent("Sell")]
         public async Task Sell(IDialogContext context, LuisResult result)
         {
-            await context.PostAsync("you wanna sell huh?");
+            await context.PostAsync("you want to sell ");
             context.Wait(MessageReceived);
         }
-
+       
 
     }
 
