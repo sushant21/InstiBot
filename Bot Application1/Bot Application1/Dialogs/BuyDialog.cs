@@ -76,6 +76,7 @@ namespace Bot_Application1
             string template =$"Title: {BookResult.book_name}, Author: {BookResult.book_author}, Course:{BookResult.book_course}";
 
             await context.PostAsync(template);
+            context.Done(true);
         }
     }
     [Serializable]
