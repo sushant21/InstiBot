@@ -47,8 +47,7 @@ namespace Bot_Application1
                     else if(is_book)
                     {
                         await context.PostAsync("You selected book category");
-                        var book_form = new FormDialog<BookForm>(new BookForm(), BookForm.BuildForm, FormOptions.PromptInStart,null);
-                        context.Call<BookForm>(book_form,BookFormComplete);
+                        context.Call(new BookDialog(),BookFormComplete);
                         context.Done(true);
                     }
                     else if(is_gadget)
@@ -70,16 +69,39 @@ namespace Bot_Application1
             }
 
         }
-        private async Task BookFormComplete(IDialogContext context, IAwaitable<BookForm> result)
+        private async Task BookFormComplete(IDialogContext context, IAwaitable<bool> result)
         {
             var BookResult = await result;
-            string template =$"Title: {BookResult.book_name}, Author: {BookResult.book_author}, Course:{BookResult.book_course}";
+            //string template =$"Title: {BookResult.book_name}, Author: {BookResult.book_author}, Course:{BookResult.book_course}";
 
-            await context.PostAsync(template);
-            context.Done(true);
+            //await context.PostAsync(template);
+            //context.Done(true);
         }
     }
     [Serializable]
+    public class BookDialog : IDialog<bool>
+    {
+        public async Task StartAsync(IDialogContext context)
+        {
+            await context.PostAsync("Please enter course code");
+            context.Wait(MessageReceivedAsync);
+        }
+        public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        {
+            var message = await argument;
+            if(message.Text=="mtl100")
+            {
+                await context.PostAsync("Correct");
+                context.Done(true);
+            }
+            else
+            {
+                await context.PostAsync("Please enter valid course code");
+            }
+
+        }
+    }
+    /*[Serializable]
     public class BookForm
     {
         [Prompt(  "What is the name of the book you are looking for?")]
@@ -101,6 +123,6 @@ namespace Bot_Application1
                 .Field(nameof(book_course))
                 .Build();
         }
-    }
+    }*/
     
 }
