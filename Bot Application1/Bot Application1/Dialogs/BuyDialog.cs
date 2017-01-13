@@ -97,6 +97,7 @@ namespace Bot_Application1
             else
             {
                 await context.PostAsync("Please enter valid course code");
+                context.Wait(MessageReceivedAsync);
             }
 
         }
