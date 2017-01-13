@@ -47,8 +47,8 @@ namespace Bot_Application1
                     else if(is_book)
                     {
                         await context.PostAsync("You selected book category");
-                        var book_form = new FormDialog<BookForm>(null, BookForm.BuildForm, FormOptions.PromptInStart);
-                        context.Call(book_form,BookFormComplete);
+                        var book_form = new FormDialog<BookForm>(new BookForm(), BookForm.BuildForm, FormOptions.PromptInStart,null);
+                        context.Call<BookForm>(book_form,BookFormComplete);
                         context.Done(true);
                     }
                     else if(is_gadget)
@@ -98,7 +98,6 @@ namespace Bot_Application1
                 .Field(nameof(book_name))
                 .Field(nameof(book_author))
                 .Field(nameof(book_course))
-                .AddRemainingFields()
                 .Build();
         }
     }
