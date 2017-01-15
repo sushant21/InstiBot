@@ -137,6 +137,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Dialogs\BookDialog.cs" />
     <Compile Include="Dialogs\SellDialog.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Dialogs\BuyDialog.cs" />

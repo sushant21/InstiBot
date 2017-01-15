@@ -78,30 +78,7 @@ namespace Bot_Application1
             //context.Done(true);
         }
     }
-    [Serializable]
-    public class BookDialog : IDialog<bool>
-    {
-        public async Task StartAsync(IDialogContext context)
-        {
-            //await context.PostAsync("Please enter course code");
-            context.Wait(this.MessageReceivedAsync);
-        }
-        public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
-        {
-            var message = await argument;
-            if(message.Text=="mtl100")
-            {
-                await context.PostAsync("Correct");
-                context.Done(true);
-            }
-            else
-            {
-                await context.PostAsync("Please enter valid course code");
-                context.Wait(MessageReceivedAsync);
-            }
-
-        }
-    }
+    
     /*[Serializable]
     public class BookForm
     {
