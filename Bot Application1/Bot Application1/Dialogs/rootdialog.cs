@@ -64,7 +64,7 @@
             await context.PostAsync("you want to buy");
             context.PrivateConversationData.SetValue<LuisResult>("luis", result);
             context.Call<bool>(new BuyDialog(), ResumeAfterBuyDialog);
-            context.Wait(MessageReceived);
+            //context.Wait(MessageReceived);
         }
         private  async Task ResumeAfterBuyDialog(IDialogContext context, IAwaitable<bool> result)
         {
