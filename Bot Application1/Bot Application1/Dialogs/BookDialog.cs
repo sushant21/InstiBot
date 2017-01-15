@@ -16,7 +16,7 @@ using Microsoft.Bot.Builder.FormFlow;
 namespace Bot_Application1
 {
     [Serializable]
-    public class BookDialog : IDialog<bool>
+    public class BookDialog : IDialog<object>
     {
         public  async Task StartAsync(IDialogContext context)
         {
