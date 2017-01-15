@@ -83,7 +83,7 @@ namespace Bot_Application1
     {
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Please enter course code");
+            //await context.PostAsync("Please enter course code");
             context.Wait(this.MessageReceivedAsync);
         }
         public virtual async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
