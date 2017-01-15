@@ -18,7 +18,7 @@ namespace Bot_Application1
     [Serializable]
     public class BuyDialog : IDialog<bool>
     {
-        public async Task StartAsync(IDialogContext context)
+        public virtual async Task StartAsync(IDialogContext context)
         {
             LuisResult result;
             context.PrivateConversationData.TryGetValue<LuisResult>("luis", out result);
@@ -47,6 +47,7 @@ namespace Bot_Application1
                     else if(is_book)
                     {
                         await context.PostAsync("You selected book category");
+                        await context.PostAsync("Please enter course code");
                         context.Call(new BookDialog(),BookFormComplete);
                         context.Done(true);
                     }

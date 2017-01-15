@@ -16,12 +16,11 @@ using Microsoft.Bot.Builder.FormFlow;
 namespace Bot_Application1
 {
     [Serializable]
-    public class BookDialog : IDialog<bool>
+    public class BookDialog : BuyDialog
     {
-        public async Task StartAsync(IDialogContext context)
+        public override async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync("Please enter course code");
-            context.Wait(this.MessageReceivedAsync);
+            context.Wait(MessageReceivedAsync);
         }
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
