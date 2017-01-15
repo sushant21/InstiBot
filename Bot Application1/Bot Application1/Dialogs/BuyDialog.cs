@@ -69,7 +69,7 @@ namespace Bot_Application1
             }
 
         }
-        private async Task BookFormComplete(IDialogContext context, IAwaitable<bool> result)
+        private async Task BookFormComplete(IDialogContext context, IAwaitable<object> result)
         {
             var BookResult = await result;
             //string template =$"Title: {BookResult.book_name}, Author: {BookResult.book_author}, Course:{BookResult.book_course}";
