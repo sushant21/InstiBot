@@ -19,14 +19,14 @@ namespace Bot_Application1
         /// </summary>
         internal static IDialog<object> MakeRoot()
         {
-            return Chain.From(() => new Bot_Application1.RootDialog());
+            return Chain.From(() => new RootDialog());
         }
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
             {
 
-                await Conversation.SendAsync(activity, MakeRoot);
+                await Conversation.SendAsync(activity, () => new RootDialog());
                 // calculate something for us to return
                 
 

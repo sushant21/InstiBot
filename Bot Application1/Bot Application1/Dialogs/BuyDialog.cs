@@ -47,7 +47,7 @@ namespace Bot_Application1
                     else if(is_book)
                     {
                         await context.PostAsync("You selected book category");
-                        context.Call(new BookDialog(),BookFormComplete);
+                        context.Call(new BookDialog(),this.BookFormComplete);
                         context.Done(true);
                     }
                     else if(is_gadget)
@@ -84,7 +84,7 @@ namespace Bot_Application1
         public async Task StartAsync(IDialogContext context)
         {
             await context.PostAsync("Please enter course code");
-            context.Wait(MessageReceivedAsync);
+            context.Wait(this.MessageReceivedAsync);
         }
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
