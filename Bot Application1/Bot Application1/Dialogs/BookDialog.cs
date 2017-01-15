@@ -16,9 +16,9 @@ using Microsoft.Bot.Builder.FormFlow;
 namespace Bot_Application1
 {
     [Serializable]
-    public class BookDialog : BuyDialog
+    public class BookDialog : IDialog<bool>
     {
-        public override async Task StartAsync(IDialogContext context)
+        public  async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
         }

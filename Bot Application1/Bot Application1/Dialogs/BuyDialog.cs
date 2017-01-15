@@ -18,19 +18,18 @@ namespace Bot_Application1
     [Serializable]
     public class BuyDialog : IDialog<bool>
     {
-        public virtual async Task StartAsync(IDialogContext context)
+        public  async Task StartAsync(IDialogContext context)
         {
             LuisResult result;
             context.PrivateConversationData.TryGetValue<LuisResult>("luis", out result);
             if (result!=null)
             {
-                 //var entities = new List<EntityRecommendation>(result.Entities);
+                 var entities = new List<EntityRecommendation>(result.Entities);
                 EntityRecommendation itemEntityRecommendation;
                 if (result.TryFindEntity("item", out itemEntityRecommendation)) 
                 //if (entities.Any((Entity)=>Entity.Type!=null))
                 {
                     await context.PostAsync("Entity detected");
-                    // var itemEntity = (entities.Where((Entity) => Entity.Type == "item").First()).Entity;
                     var itemEntity = itemEntityRecommendation.Entity;
                     List<string> cycle = new List<string> { "cycle","cycles","bicycle","bicycles" };
                     List<string> book = new List<string> { "book", "books" };
@@ -46,8 +45,8 @@ namespace Bot_Application1
                     }
                     else if(is_book)
                     {
-                        await context.PostAsync("You selected book category");
-                        await context.PostAsync("Please enter course code");
+                       // await context.PostAsync("You selected book category");
+                        //await context.PostAsync("Please enter course code");
                         context.Call(new BookDialog(),BookFormComplete);
                         context.Done(true);
                     }
