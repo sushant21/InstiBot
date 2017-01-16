@@ -16,7 +16,7 @@ using Microsoft.Bot.Builder.FormFlow;
 namespace Bot_Application1
 {
     [Serializable]
-    public class BuyDialog : IDialog<object>
+    public class BuyDialog : IDialog<bool>
     {
         public  async Task StartAsync(IDialogContext context)
         {
@@ -29,7 +29,7 @@ namespace Bot_Application1
                 if (result.TryFindEntity("item", out itemEntityRecommendation)) 
                 //if (entities.Any((Entity)=>Entity.Type!=null))
                 {
-                    await context.PostAsync("Entity detected");
+                    //await context.PostAsync("Entity detected");
                     var itemEntity = itemEntityRecommendation.Entity;
                     List<string> cycle = new List<string> { "cycle","cycles","bicycle","bicycles" };
                     List<string> book = new List<string> { "book", "books" };
@@ -45,10 +45,10 @@ namespace Bot_Application1
                     }
                     else if(is_book)
                     {
-                       // await context.PostAsync("You selected book category");
-                        //await context.PostAsync("Please enter course code");
+                        await context.PostAsync("You selected book category");
+                        await context.PostAsync("Please enter course code");
                         context.Call(new BookDialog(),BookFormComplete);
-                        context.Done(true);
+                        //context.Done(true);
                     }
                     else if(is_gadget)
                     {
@@ -69,13 +69,10 @@ namespace Bot_Application1
             }
 
         }
-        private async Task BookFormComplete(IDialogContext context, IAwaitable<object> result)
+        private async Task BookFormComplete(IDialogContext context, IAwaitable<bool> result)
         {
             var BookResult = await result;
-            //string template =$"Title: {BookResult.book_name}, Author: {BookResult.book_author}, Course:{BookResult.book_course}";
-
-            //await context.PostAsync(template);
-            //context.Done(true);
+            context.Done(true);
         }
     }
     

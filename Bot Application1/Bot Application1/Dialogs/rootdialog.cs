@@ -66,14 +66,14 @@
             context.Call(new BuyDialog(), ResumeAfterBuyDialog);
             //context.Wait(MessageReceived);
         }
-        private  async Task ResumeAfterBuyDialog(IDialogContext context, IAwaitable<object> result)
+        private  async Task ResumeAfterBuyDialog(IDialogContext context, IAwaitable<bool> result)
         {
             var success = await result;
-           // if (success)
-            //{
+            if (success)
+            {
                 await context.PostAsync("How else can I help you?");
                 context.Wait(MessageReceived);
-           // }
+           }
         }
         [LuisIntent("Sell")]
         public async Task Sell(IDialogContext context, LuisResult result)
