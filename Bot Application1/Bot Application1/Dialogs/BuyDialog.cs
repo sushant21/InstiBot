@@ -27,9 +27,9 @@ namespace Bot_Application1
                  var entities = new List<EntityRecommendation>(result.Entities);
                 EntityRecommendation itemEntityRecommendation;
                 if (result.TryFindEntity("item", out itemEntityRecommendation)) 
-                //if (entities.Any((Entity)=>Entity.Type!=null))
+                if (entities.Any((Entity)=>Entity.Type!=null))
                 {
-                    //await context.PostAsync("Entity detected");
+                    await context.PostAsync("Entity detected");
                     var itemEntity = itemEntityRecommendation.Entity;
                     List<string> cycle = new List<string> { "cycle","cycles","bicycle","bicycles" };
                     List<string> book = new List<string> { "book", "books" };
@@ -76,17 +76,17 @@ namespace Bot_Application1
         }
     }
     
-    /*[Serializable]
+    [Serializable]
     public class BookForm
     {
         [Prompt(  "What is the name of the book you are looking for?")]
         public string book_name { get; set; }
 
-        //[Optional]
+        [Optional]
         [Prompt("Author?(Optional)")]
         public string book_author { get; set; }
 
-        //[Optional]
+        [Optional]
         [Prompt("Course?(Optional)")]
         public string book_course { get; set; }
 
@@ -98,6 +98,6 @@ namespace Bot_Application1
                 .Field(nameof(book_course))
                 .Build();
         }
-    }*/
+    }
     
 }
